@@ -2,7 +2,6 @@ package com.qg.taxi.model.gps;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author Wilder Gao
@@ -12,8 +11,10 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Gps {
+
+    public Gps() {}
+
     /**
      * 经度
      */
