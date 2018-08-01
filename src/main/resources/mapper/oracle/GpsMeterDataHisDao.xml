@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.oracle.GpsLogDao">
+    <!--映射实体对象-->
+    <resultMap id="GPSLogResultMap" type="com.qg.taxi.model.gps.GpsLog">
+        <id property="licenseplateno" column="LICENSEPLATENO" />
+        <result property="inDate" column="IN_DATE"/>
+        <result property="gpsDate" column="GPS_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="longitude" column="LONGITUDE" />
+        <result property="latitude" column="LATITUDE" />
+        <result property="height" column="HEIGHT" />
+        <result property="speed" column="SPEED" />
+        <result property="direction" column="DIRECTION" />
+        <result property="eff" column="EFF" />
+        <result property="carStat1" column="CAR_STAT1" />
+        <result property="carStat2" column="CAR_STAT2" />
+    </resultMap>
+
+
+    <select id="selectFormTimeByCar" resultMap="GPSLogResultMap">
+        select * from
+            ( select a.*, ROWNUM rnum from
+                MANAGE_TAXI.GPS_LOG a
+            where ROWNUM &lt; #{end} )
+        where rnum  &gt;= #{start}
+              AND EFF=1
+              AND LICENSEPLATENO = '粤A2BB40'
+              AND GPS_TIME BETWEEN  to_date('2017-02-01 22:00:00', 'YYYY-MM-DD HH24:mi:ss') AND to_date('2017-02-02 01:00:00', 'YYYY-MM-DD HH24:mi:ss')
+        ORDER BY GPS_TIME
+    </select>
+
+</mapper>

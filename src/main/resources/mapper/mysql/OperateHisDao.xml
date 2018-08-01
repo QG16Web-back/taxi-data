@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.mysql.OperateHisDao">
+    <insert id="addGpsOperateHisList" parameterType="com.qg.taxi.model.gps.GpsOperateHis">
+        INSERT INTO ${graph}(EQUIPMENT_ID,PLATENO,COMPANY_ID,CHAUFFEUR_NO,TEAM_CODE,EMPTY_MILE
+        ,EMPTY_BEGIN_TIME,WORK_BEGIN_TIME,WORK_END_TIME,UNIT_PRICE,LOAD_MILE,SLOW_COUNT_TIME,OPERATE_MONEY,EVALUATE,TRADE_CODE,GET_ON_LONGITUDE,GET_ON_LATITUDE,GET_OFF_LONGITUDE,GET_OFF_LATITUDE
+        ,TIME_REPRE,GEOHASH)
+        VALUES
+        <foreach collection="list" item="item" separator =",">
+            (
+            #{item.equipmentId},
+            #{item.plateNo},
+            #{item.companyId},
+            #{item.chauffeurNo},
+            #{item.teamCode},
+            #{item.emptyMile},
+            #{item.emptyBeginTime},
+            #{item.workBeginTime},
+            #{item.workEndTime},
+            #{item.unitPrice},
+            #{item.loadMile},
+            #{item.slowCountTime},
+            #{item.operateMoney},
+            #{item.evaluate},
+            #{item.tradeCode},
+            #{item.getOnLongitude},
+            #{item.getOnLatitude},
+            #{item.getOffLongitude},
+            #{item.getOffLatitude},
+            #{item.timeRepre},
+            (SELECT ST_GEOHASH(#{item.getOnLongitude},#{item.getOnLatitude}, 6))
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectGeoHashByTime" resultType="com.qg.taxi.model.gps.Gps">
+        SELECT GET_ON_LONGITUDE AS 'lng', GET_ON_LATITUDE AS 'lat' , TIME_REPRE AS 'timeRepre'
+        FROM ${tableName}
+        WHERE GET_ON_LONGITUDE BETWEEN ${lngmin} AND ${lngmax}
+              AND GET_ON_LATITUDE BETWEEN ${latmin} AND ${latmax}
+        ORDER BY TIME_REPRE
+    </select>
+
+    <update id="updateOpsHis" parameterType="java.util.List">
+        update ${tableName}
+        SET ROW_KEY = #{rowKey}
+        where ID = ${id}
+
+    </update>
+
+
+    <select id="diagramSelect" resultType="java.lang.Integer">
+        SELECT COUNT(*) AS 'count'
+        FROM ${tableName}
+        WHERE GEOHASH5 IN
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        GROUP BY TIME_REPRE
+    </select>
+
+    <select id="selectGuangZhou" resultType ="com.qg.taxi.model.inform.CalculateGeoHash">
+        SELECT COUNT(*) AS 'count' ,GEOHASH5 AS 'geoHash'
+        FROM ${tableName} WHERE GEOHASH5 = #{geoHash}
+    </select>
+</mapper>

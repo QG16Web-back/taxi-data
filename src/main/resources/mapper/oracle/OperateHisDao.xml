@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.oracle.OracleOperateHisDao">
+    <resultMap id="GpsOperateHisMap" type="com.qg.taxi.model.gps.GpsOperateHis">
+        <id property="id" column="ID"/>
+        <result property="equipmentId" column="EQUIPMENT_ID"/>
+        <result property="plateNo" column="PLATE_NO"/>
+        <result property="companyId" column="COMPANY_ID"/>
+        <result property="chauffeurNo" column="CHAUFFEUR_NO"/>
+        <result property="teamCode" column="TEAM_CODE"/>
+        <result property="emptyMile" column="EMPTY_MILE"/>
+        <result property="emptyBeginTime" column="EMPTY_BEGIN_TIME"/>
+        <result property="workBeginTime" column="WORK_BEGIN_TIME"/>
+        <result property="workEndTime" column="WORK_END_TIME"/>
+        <result property="unitPrice" column="UNIT_PRICE"/>
+        <result property="loadMile" column="LOAD_MILE"/>
+        <result property="slowCountTime" column="SLOW_COUNT_TIME"/>
+        <result property="operateMoney" column="OPERATE_MONEY"/>
+        <result property="evaluate" column="EVALUATE"/>
+        <result property="tradeCode" column="TRADE_CODE"/>
+        <result property="getOnLongitude" column="GET_ON_LONGITUDE"/>
+        <result property="getOnLatitude" column="GET_ON_LATITUDE"/>
+        <result property="getOffLongitude" column="GET_OFF_LONGITUDE"/>
+        <result property="getOffLatitude" column="GET_OFF_LATITUDE"/>
+    </resultMap>
+
+    <!-- 从oracle数据中查询第二张表（出租车历史表）指定行的数据  -->
+    <select id="selectOperateHisByNum" resultMap="GpsOperateHisMap">
+        SELECT * FROM
+            ( select a.*, ROWNUM rnum from
+                CLEARING.OPERATE_HIS a
+            where ROWNUM &lt; #{end} )
+        where rnum  &gt;= #{start}
+    </select>
+
+</mapper>

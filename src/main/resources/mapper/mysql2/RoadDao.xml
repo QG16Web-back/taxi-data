@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.mysql2.RoadDao">
+
+    <select id="selectRoadGps" resultType="com.qg.taxi.model.gps.Gps">
+        SELECT BDLAT AS 'lat', BDLON AS 'lng', 50 AS 'count'
+        FROM node LIMIT 1000
+    </select>
+
+    <!-- 得到所有以 xxx路 命名的道路-->
+    <select id="getWays" resultType="com.qg.taxi.model.inform.Way">
+        SELECT ID AS 'id', NAME AS 'name',
+               NODEIDLIST AS 'nodeIdList'
+        FROM
+            way
+        WHERE `NAME` LIKE '%路'
+    </select>
+
+    <!-- 得到一条路上的所有点的经纬度坐标 -->
+    <select id="getRoadNode" resultType="com.qg.taxi.model.inform.Node">
+        SELECT ID AS 'id', LAT AS 'lat', LON AS 'lon',
+        BDLAT AS 'bdLat', BDLON AS 'bdLon'
+        FROM node
+        WHERE ID IN
+        (
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item}
+            )
+        </foreach>
+        ) ORDER BY LON ASC
+    </select>
+
+</mapper>

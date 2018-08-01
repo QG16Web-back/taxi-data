@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.mysql.GeoHashDao">
+
+    <select id="selectGuangZhou" resultType ="com.qg.taxi.model.inform.CalculateGeoHash">
+        SELECT COUNT(*) AS 'count' ,GEOHASH5 AS 'geoHash'
+        FROM #{tableName} WHERE GEOHASH5 = #{geoHash}
+    </select>
+
+    <!--
+        原先用来查询黄埔大道的车信息，现在规范化为查询一个区域出租车的信息
+        黄埔大道区域的经纬度范围为 lat：23.091984628621249 ， 23.125502589028295
+                log：113.30501092556654 ， 113.42343431124503
+    -->
+    <select id="getRoadAreaGps" resultType="com.qg.taxi.model.gps.Gps">
+        SELECT LONGITUDE AS 'lng',
+               LATITUDE AS 'lat', 30 AS 'count'
+        FROM gpsdata1
+        WHERE LATITUDE BETWEEN #{latmin} AND #{latmax}
+              AND LONGITUDE BETWEEN #{logmin} AND #{logmax}
+              AND HOUR_REPRE = #{timeRepre}
+        GROUP BY GPS_TIME
+        LIMIT 1000
+    </select>
+</mapper>
