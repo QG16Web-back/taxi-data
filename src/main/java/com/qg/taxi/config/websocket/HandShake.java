@@ -3,6 +3,7 @@ package com.qg.taxi.config.websocket;
 import com.qg.taxi.hbase.Login;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -22,14 +23,14 @@ import java.util.Map;
 @Component
 public class HandShake implements HandshakeInterceptor {
 
-    private static Configuration conf;
+    private static Configuration conf = HBaseConfiguration.create();
 
     public static Configuration getConf() {
         return conf;
     }
 
     @Override
-    public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
+    public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) {
         log.info("握手之前: " + serverHttpRequest.getRemoteAddress().toString() + "进行初始化");
         try {
             Login.submitLogin(conf);

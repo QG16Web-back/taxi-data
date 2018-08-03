@@ -6,6 +6,7 @@ import com.qg.taxi.config.websocket.HandShake;
 import com.qg.taxi.hbase.HBaseSample;
 import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.service.HttpApiService;
+import com.qg.taxi.util.CoordinateTransformUtil;
 import com.qg.taxi.util.ExcelUtil;
 import com.qg.taxi.util.MyGeoHashUtils;
 import com.sun.istack.internal.Nullable;
@@ -60,9 +61,9 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
         Gson gson = new Gson();
         Map<String, String> map = gson.fromJson(webSocketMessage.getPayload().toString(), new TypeToken<Map<String, String>>() {
         }.getType());
-        if (map.get("index").equals("1")) {
+        if ("1".equals(map.get("index"))) {
             getGps1(webSocketSession, map);
-        } else if (map.get("index").equals("2")) {
+        } else if ("2".equals(map.get("index"))) {
             getGpsRoad(webSocketSession, map);
         }
     }
@@ -86,18 +87,20 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
             scan.setFilter(filter);
             rScanner = table.getScanner(scan);
             for (Result r = rScanner.next(); r != null; r = rScanner.next()) {
-                Map<String, Double> resultMap = new HashMap<>();
+                double lng = 0;
+                double lat = 0;
                 for (Cell cell : r.rawCells()) {
-                    if (Bytes.toString(CellUtil.cloneQualifier(cell)).equals("LATITUDE")) {
-                        resultMap.put("lat", Double.parseDouble(Bytes.toString(CellUtil.cloneValue(cell))));
-
+                    if ("LATITUDE".equals(Bytes.toString(CellUtil.cloneQualifier(cell)))) {
+                        lat = Double.parseDouble(Bytes.toString(CellUtil.cloneValue(cell)));
                     } else {
-                        resultMap.put("lng", Double.parseDouble(Bytes.toString(CellUtil.cloneValue(cell))));
+                        lng = Double.parseDouble(Bytes.toString(CellUtil.cloneValue(cell)));
                     }
                 }
 
-                //将坐标转换成百度地图坐标
-                changeGpsToBaidu(resultMap);
+                double[] result = CoordinateTransformUtil.wgs84tobd09(lng, lat);
+                Map<String, Double> resultMap = new HashMap<>(2);
+                resultMap.put("lng", result[0]);
+                resultMap.put("lat", result[1]);
                 TextMessage response = new TextMessage(gson.toJson(resultMap));
                 webSocketSession.sendMessage(response);
                 Thread.sleep(1000);
@@ -106,8 +109,6 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
             System.out.println("时间：" + (end - start));
         } catch (IOException e) {
             log.error("Scan data failed ", e);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
         } finally {
             if (rScanner != null) {
                 // Close the scanner object.
@@ -124,7 +125,7 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
         }
     }
 
-
+    @SuppressWarnings("unchecked")
     private void changeGpsToBaidu(Map<String, Double> map) throws IOException, URISyntaxException {
         Map<String, Object> requestMap = new HashMap<>();
         String coords = map.get("lng")+","+map.get("lat");
@@ -162,7 +163,7 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
 
             Result[] r;
             while ((r = rScanner.next(300)) != null) {
-                Map<String, Object> resultMap = new HashMap<>();
+                Map<String, Object> resultMap = new HashMap<>(2);
                 String time = null;
                 String resultTime;
                 if (r.length == 0) {

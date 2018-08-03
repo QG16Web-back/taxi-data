@@ -13,7 +13,7 @@
         GROUP BY LATITUDE, LONGITUDE
     </select>
 
-    <resultMap id="gpsMap" type="com.qg.taxi.model.gps.GPS">
+    <resultMap id="gpsMap" type="com.qg.taxi.model.gps.GpsDouble">
         <result property="LONGITUDE" column="LONGITUDE"/>
         <result property="LATITUDE" column="LATITUDE"/>
     </resultMap>

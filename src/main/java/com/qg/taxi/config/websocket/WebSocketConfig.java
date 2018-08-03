@@ -1,6 +1,7 @@
 package com.qg.taxi.config.websocket;
 
 import com.qg.taxi.handler.GpsWebSocketHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -23,6 +24,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
         webSocketHandlerRegistry.addHandler(handler,"/sockjs/ws").addInterceptors(new HandShake()).withSockJS();
     }
 
+    @Autowired
     public WebSocketConfig(GpsWebSocketHandler handler){
         this.handler = handler;
     }

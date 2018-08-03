@@ -50,7 +50,7 @@ public class YctServiceImpl implements YctService {
 
     @Override
     public RequestResult getOnOff(HttpServletRequest request) throws ParseException, IOException, URISyntaxException {
-        File file = new File(request.getServletContext().getRealPath("/take-taxi/yct.json"));
+        File file = new File(request.getServletContext().getRealPath("/yct/yct.json"));
         if (file.exists()) {
             throw new TaxiException(StateEnum.FILE_IS_EXIST);
         }
