@@ -122,7 +122,7 @@ public class ExcelUtil {
 
     public static List<String> getPlate() throws IOException {
         List<String> list = new ArrayList<>();
-        Resource resource = new ClassPathResource("plate.xls");
+        Resource resource = new ClassPathResource(System.getProperty("user.dir") + "/src/main/resources/plate.xls");
         File file = resource.getFile();
 
         try {

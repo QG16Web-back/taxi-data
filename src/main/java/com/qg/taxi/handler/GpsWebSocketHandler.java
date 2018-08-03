@@ -62,14 +62,14 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
         Map<String, String> map = gson.fromJson(webSocketMessage.getPayload().toString(), new TypeToken<Map<String, String>>() {
         }.getType());
         if ("1".equals(map.get("index"))) {
-            getGps1(webSocketSession, map);
+            getThermalMap(webSocketSession, map);
         } else if ("2".equals(map.get("index"))) {
             getGpsRoad(webSocketSession, map);
         }
     }
 
     private void getGpsRoad(WebSocketSession webSocketSession, Map<String, String> map) throws IOException, InterruptedException {
-        HBaseSample hBaseSample = new HBaseSample(HandShake.getConf(), "gpsdata");
+        HBaseSample hBaseSample = new HBaseSample(HandShake.getConf(), "gpsdata_copy");
         System.out.println("准备进行HBase数据测试！");
         Table table = null;
         ResultScanner rScanner = null;
@@ -140,7 +140,7 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
         System.out.println(resultMap);
     }
 
-    private void getGps1(WebSocketSession webSocketSession, Map<String, String> map) throws InterruptedException, IOException {
+    private void getThermalMap(WebSocketSession webSocketSession, Map<String, String> map) throws InterruptedException, IOException {
         HBaseSample hBaseSample = new HBaseSample(HandShake.getConf(), "operate_his");
 
         System.out.println("准备进行HBase数据测试！");
