@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.mysql.YctDao">
+
+    <select id="getGps" resultMap="gpsMap">
+        select LONGITUDE, LATITUDE
+        from ${tableName}
+        where LICENSEPLATENO = #{PLATENO}
+          and GPS_TIME &gt;= #{startTime}
+          and GPS_TIME &lt;= #{endTime}
+        GROUP BY LATITUDE, LONGITUDE
+    </select>
+
+    <resultMap id="gpsMap" type="com.qg.taxi.model.gps.GPS">
+        <result property="LONGITUDE" column="LONGITUDE"/>
+        <result property="LATITUDE" column="LATITUDE"/>
+    </resultMap>
+
+    <select id="getOnOffGps" resultType="com.qg.taxi.model.gps.OnOffGps">
+        SELECT GET_ON_LONGITUDE, GET_OFF_LATITUDE, GET_OFF_LONGITUDE, GET_ON_LATITUDE
+        from ${tableName}
+        where PLATENO = #{PLATENO}
+          and WORK_BEGIN_TIME = #{startTime}
+    </select>
+
+    <select id="getYctList" resultType="java.lang.String">
+        SELECT YCT_LOGIC_CARD_NO
+        FROM yct
+        GROUP BY YCT_LOGIC_CARD_NO
+        HAVING count(YCT_LOGIC_CARD_NO) >= 7
+    </select>
+
+    <select id="getYctInfo" resultMap="yctMap">
+        SELECT *
+        FROM yct
+        WHERE YCT_LOGIC_CARD_NO IN (SELECT YCT_LOGIC_CARD_NO
+                                    FROM yct
+                                    GROUP BY YCT_LOGIC_CARD_NO
+                                    HAVING count(YCT_LOGIC_CARD_NO) >= 7
+                                    ORDER BY count(YCT_LOGIC_CARD_NO))
+        ORDER BY YCT_LOGIC_CARD_NO
+    </select>
+
+    <resultMap id="yctMap" type="com.qg.taxi.model.inform.Yct">
+        <id column="METER_DATA_NO" property="meterDataNo"/>
+        <result column="YCT_LOGIC_CARD_NO" property="yctLogicCardNo"/>
+        <result column="WORK_BEGIN_TIME" property="workBeginTime"/>
+        <result column="WORK_END_TIME" property="workEndTime"/>
+        <result column="PLATENO" property="plateNo"/>
+    </resultMap>
+</mapper>

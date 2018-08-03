@@ -2,7 +2,7 @@ package com.qg.taxi.callable;
 
 import com.qg.taxi.dao.mysql.GpsMeterDataHisDao;
 import com.qg.taxi.model.action.DriverInfo;
-import com.qg.taxi.utils.SpringUtil;
+import com.qg.taxi.util.SpringUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 

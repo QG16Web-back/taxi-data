@@ -1,4 +1,4 @@
-package com.qg.taxi.utils;
+package com.qg.taxi.util;
 
 import ch.hsr.geohash.GeoHash;
 import com.qg.taxi.model.gps.Gps;

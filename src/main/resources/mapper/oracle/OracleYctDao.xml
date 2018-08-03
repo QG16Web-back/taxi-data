@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg.taxi.dao.oracle.OracleYctDao">
+
+    <select id="getOnOffGpsOracle" resultType="com.qg.taxi.model.gps.OnOffGps">
+        SELECT GET_ON_LONGITUDE, GET_OFF_LATITUDE, GET_OFF_LONGITUDE, GET_ON_LATITUDE
+        FROM CLEARING.OPERATE_HIS
+        WHERE PLATE_NO = #{plateNo}
+          AND WORK_BEGIN_TIME = TO_DATE(
+                                    #{time},
+                                    'yyyy-mm-dd hh24:mi:ss'
+                )
+    </select>
+
+    <select id="getOnOffGpsOracle2" resultType="com.qg.taxi.model.gps.GpsString">
+        SELECT LONGITUDE, LATITUDE
+        FROM MANAGE_TAXI.GPS_LOG
+        WHERE LICENSEPLATENO = #{plateNo}
+          AND GPS_TIME &gt;= TO_DATE(
+                                 #{startTime},
+                                 'yyyy-mm-dd hh24:mi:ss'
+                )
+          AND GPS_TIME &lt;= TO_DATE(
+                                 #{endTime},
+                                 'yyyy-mm-dd hh24:mi:ss'
+                )
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.qg.taxi.utils;
+package com.qg.taxi.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

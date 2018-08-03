@@ -1,4 +1,4 @@
-package com.qg.taxi.utils;
+package com.qg.taxi.util;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

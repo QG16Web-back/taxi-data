@@ -4,7 +4,7 @@ import com.qg.taxi.dao.oracle.OracleOperateHisDao;
 import com.qg.taxi.model.gps.Gps;
 import com.qg.taxi.model.gps.GpsOperateHis;
 import com.qg.taxi.service.OperateHisService;
-import com.qg.taxi.utils.DateUtil;
+import com.qg.taxi.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
