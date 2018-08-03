@@ -25,32 +25,36 @@ import java.util.List;
 public interface GpsMeterDataHisDao {
     /**
      * 往 mysql插入数据
+     *
      * @param graph 表名
-     * @param list 集合
-     * @return
+     * @param list  集合
+     * @return int
      */
     int addGpsMeterHisList(@Param("graph") String graph, @Param("list") List<GpsMeterDataHis> list);
 
     /**
      * 以geoHash、小时为单位统计出租车的总量
-     * @param tableName
-     * @param geoHash
-     * @return
+     *
+     * @param tableName 表名
+     * @param geoHash   geoHash
+     * @return List
      */
     List<CountModel> countByTimeGeoHash(@Param("tableName") String tableName,
                                         @Param("geoHash") String geoHash);
 
     /**
      * 统计某个小时车的空间分布
-     * @param tableName
-     * @param timeRepre
-     * @return
+     *
+     * @param tableName 表名
+     * @param timeRepre 时间
+     * @return List
      */
     List<CountModel> countByDay(@Param("tableName") String tableName,
                                 @Param("timeRepre") int timeRepre);
 
     /**
      * 查询某天出租车上下车总量，以小时为单位
+     *
      * @param table 表名
      * @return 结果集合
      */
@@ -58,31 +62,35 @@ public interface GpsMeterDataHisDao {
 
     /**
      * 查询某天出租车收入情况
+     *
      * @param table 表名
-     * @return  结果集合
+     * @return 结果集合
      */
     List<DriverInfo> getIncome(@Param("table") String table);
 
     /**
      * 查询某个时间段的收入情况（时间段自定义）
-     * @param table 表名
+     *
+     * @param table     表名
      * @param startTime 开始时间
      * @param endTime   结束时间
-     * @return  结果集合
+     * @return 结果集合
      */
     List<DriverInfo> getIncomeByCustomQuery(@Param("table") String table, @Param("startTime") int startTime, @Param("endTime") int endTime);
 
     /**
      * 查询某段时间上车情况（时间段自定义）
-     * @param table 表名
+     *
+     * @param table     表名
      * @param startTime 开始时间
      * @param endTime   结束时间
-     * @return  结果集合
+     * @return 结果集合
      */
     List<TakeTaxiCount> takeTaxiCount(@Param("table") String table, @Param("startTime") int startTime, @Param("endTime") int endTime);
 
     /**
      * 查询某一天的空载数量（按照车牌分组）
+     *
      * @param table 表名
      * @return 结果集合
      */
@@ -90,45 +98,51 @@ public interface GpsMeterDataHisDao {
 
     /**
      * 自定义时间段出租车的空载情况
-     * @param table 表名
+     *
+     * @param table     表名
      * @param startTime 开始时间
      * @param endTime   结束时间
-     * @return  结果集合
+     * @return 结果集合
      */
     List<DriverInfo> getEmptyMileageByCustomQuery(@Param("table") String table, @Param("startTime") int startTime, @Param("endTime") int endTime);
 
     /**
      * 查询某一天出租车的收入情况，以小时为单位
+     *
      * @param table 表名
-     * @return  结果集合
+     * @return 结果集合
      */
     List<DriverInfo> getIncomeByHour(@Param("table") String table);
 
     /**
      * 查询某天出租车空载情况，以小时为单位
+     *
      * @param table 表名
-     * @return  结果集合
+     * @return 结果集合
      */
     List<DriverInfo> getEmptyMileageByHour(@Param("table") String table);
 
     /**
      * 获得Id、车牌、时间等信息，为后期组合成rowkey导入hbase做准备
+     *
      * @param tableName 表名
-     * @return  结果集合
+     * @return 结果集合
      */
     List<GpsOperateHis> getOpsHisData(@Param("tableName") String tableName);
 
     /**
      * 得到一天广州市以geohash为单位统计总量，小时划分
+     *
      * @param tableName 表名
-     * @return  总量结果集合
+     * @return 总量结果集合
      */
     List<Gps> geoHashCount(@Param("tableName") String tableName);
 
     /**
      * 获得第二张表的信息
+     *
      * @param tableName 表名称
-     * @return  结果集
+     * @return 结果集
      */
     List<GpsMeterDataHis> getMeterDataHisData(@Param("tableName") String tableName);
 
