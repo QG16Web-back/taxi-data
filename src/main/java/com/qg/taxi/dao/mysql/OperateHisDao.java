@@ -1,6 +1,6 @@
 package com.qg.taxi.dao.mysql;
 
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.model.gps.GpsOperateHis;
 import com.qg.taxi.model.inform.CalculateGeoHash;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,7 +35,7 @@ public interface OperateHisDao {
      * @param latmax    最大纬度
      * @return 返回数据集
      */
-    List<Gps> selectGeoHashByTime(@Param("tableName") String tableName,
+    List<GPS> selectGeoHashByTime(@Param("tableName") String tableName,
                                   @Param("lngmin") double lngmin,
                                   @Param("lngmax") double lngmax,
                                   @Param("latmin") double latmin,

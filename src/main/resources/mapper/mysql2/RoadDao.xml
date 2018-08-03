@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg.taxi.dao.mysql2.RoadDao">
 
-    <select id="selectRoadGps" resultType="com.qg.taxi.model.gps.Gps">
+    <select id="selectRoadGps" resultType="com.qg.taxi.model.gps.GPS">
         SELECT BDLAT AS 'lat', BDLON AS 'lng', 50 AS 'count'
         FROM node LIMIT 1000
     </select>

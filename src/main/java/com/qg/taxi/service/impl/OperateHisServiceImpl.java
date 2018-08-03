@@ -1,7 +1,7 @@
 package com.qg.taxi.service.impl;
 
 import com.qg.taxi.dao.oracle.OracleOperateHisDao;
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.model.gps.GpsOperateHis;
 import com.qg.taxi.service.OperateHisService;
 import com.qg.taxi.util.DateUtil;
@@ -96,7 +96,7 @@ public class OperateHisServiceImpl implements OperateHisService {
 
 
     @Override
-    public Map<Integer, List<Gps>> getAreaGpsMapByDay(double latmin, double lonmin, double latmax, double lonmax, Date date) {
+    public Map<Integer, List<GPS>> getAreaGpsMapByDay(double latmin, double lonmin, double latmax, double lonmax, Date date) {
         return null;
     }
 }

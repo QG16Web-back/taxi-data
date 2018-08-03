@@ -1,6 +1,6 @@
 package com.qg.taxi.dao.mysql2;
 
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.model.inform.Node;
 import com.qg.taxi.model.inform.Way;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,7 +21,7 @@ public interface RoadDao {
      * 返回GPS集合
      * @return
      */
-    List<Gps> selectRoadGps();
+    List<GPS> selectRoadGps();
 
     /**
      * 获得路

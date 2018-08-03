@@ -11,9 +11,9 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class Gps {
+public class GPS {
 
-    public Gps() {}
+    public GPS() {}
 
     /**
      * 经度
@@ -33,7 +33,7 @@ public class Gps {
     private int timeRepre;
 
 
-    public Gps(double lng, double lat ){
+    public GPS(double lng, double lat ){
         this.lng = lng;
         this.lat = lat;
     }

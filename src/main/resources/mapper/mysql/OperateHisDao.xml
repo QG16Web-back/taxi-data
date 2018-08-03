@@ -35,7 +35,7 @@
         </foreach>
     </insert>
 
-    <select id="selectGeoHashByTime" resultType="com.qg.taxi.model.gps.Gps">
+    <select id="selectGeoHashByTime" resultType="com.qg.taxi.model.gps.GPS">
         SELECT GET_ON_LONGITUDE AS 'lng', GET_ON_LATITUDE AS 'lat' , TIME_REPRE AS 'timeRepre'
         FROM ${tableName}
         WHERE GET_ON_LONGITUDE BETWEEN ${lngmin} AND ${lngmax}

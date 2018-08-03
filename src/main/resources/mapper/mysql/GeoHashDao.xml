@@ -14,7 +14,7 @@
         黄埔大道区域的经纬度范围为 lat：23.091984628621249 ， 23.125502589028295
                 log：113.30501092556654 ， 113.42343431124503
     -->
-    <select id="getRoadAreaGps" resultType="com.qg.taxi.model.gps.Gps">
+    <select id="getRoadAreaGps" resultType="com.qg.taxi.model.gps.GPS">
         SELECT LONGITUDE AS 'lng',
                LATITUDE AS 'lat', 30 AS 'count'
         FROM gpsdata1

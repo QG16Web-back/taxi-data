@@ -1,6 +1,6 @@
 package com.qg.taxi.service;
 
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -34,7 +34,7 @@ public interface OperateHisService {
      * @param date
      * @return
      */
-    Map<Integer, List<Gps>> getAreaGpsMapByDay(double latmin, double lonmin,
+    Map<Integer, List<GPS>> getAreaGpsMapByDay(double latmin, double lonmin,
                                                double latmax, double lonmax,
                                                Date date);
 }

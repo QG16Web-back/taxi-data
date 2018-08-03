@@ -1,6 +1,6 @@
 package com.qg.taxi.dao.mysql;
 
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.model.inform.CalculateGeoHash;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -38,7 +38,7 @@ public interface GeoHashDao {
      * @param logmax 最大经度
      * @return gps坐标点集合
      */
-    List<Gps> getRoadAreaGps(@Param("latmin") double latmin,
+    List<GPS> getRoadAreaGps(@Param("latmin") double latmin,
                              @Param("latmax") double latmax,
                              @Param("logmin") double logmin,
                              @Param("logmax") double logmax);

@@ -3,7 +3,7 @@ package com.qg.taxi.dao.mysql;
 import com.qg.taxi.model.action.DriverInfo;
 import com.qg.taxi.model.action.TakeTaxiCount;
 import com.qg.taxi.model.excel.CountModel;
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.model.gps.GpsMeterDataHis;
 import com.qg.taxi.model.gps.GpsOperateHis;
 import org.apache.ibatis.annotations.Mapper;
@@ -136,7 +136,7 @@ public interface GpsMeterDataHisDao {
      * @param tableName 表名
      * @return 总量结果集合
      */
-    List<Gps> geoHashCount(@Param("tableName") String tableName);
+    List<GPS> geoHashCount(@Param("tableName") String tableName);
 
     /**
      * 获得第二张表的信息

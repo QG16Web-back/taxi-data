@@ -1,7 +1,7 @@
 package com.qg.taxi.util;
 
 import ch.hsr.geohash.GeoHash;
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 
 import java.text.DecimalFormat;
 import java.util.LinkedList;
@@ -72,13 +72,13 @@ public class MyGeoHashUtils {
      * @param geoHashString geoHash字符串
      * @return 经纬度
      */
-    public static Gps getGpsByGeoHash(String geoHashString) {
+    public static GPS getGpsByGeoHash(String geoHashString) {
         //设置精度
         DecimalFormat decimalFormat = new DecimalFormat("0.0000");
         //得到GeoHash对象
         GeoHash geoHash = GeoHash.fromGeohashString(geoHashString);
         StringBuilder geoHashPoint = new StringBuilder(geoHash.getPoint().toString());
-        Gps gps = new Gps();
+        GPS gps = new GPS();
         //切掉两个括号
         geoHashPoint.delete(0, 1);
         geoHashPoint.delete(geoHashPoint.length() - 1, geoHashPoint.length());

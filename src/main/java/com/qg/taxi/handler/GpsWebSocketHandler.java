@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.qg.taxi.config.websocket.HandShake;
 import com.qg.taxi.hbase.HBaseSample;
-import com.qg.taxi.model.gps.Gps;
+import com.qg.taxi.model.gps.GPS;
 import com.qg.taxi.service.HttpApiService;
 import com.qg.taxi.util.ExcelUtil;
 import com.qg.taxi.util.MyGeoHashUtils;
@@ -158,7 +158,7 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
 
             rScanner = table.getScanner(scan);
             int i = 0;
-            List<Gps> list = new ArrayList<>();
+            List<GPS> list = new ArrayList<>();
 
             Result[] r;
             while ((r = rScanner.next(300)) != null) {
@@ -177,7 +177,7 @@ public class GpsWebSocketHandler implements WebSocketHandler  {
                 resultMap.put("time", resultTime);
                 for (Result result : r) {
                     for (Cell cell : result.rawCells()) {
-                        Gps gps = MyGeoHashUtils.getGpsByGeoHash(Bytes.toString(CellUtil.cloneValue(cell)));
+                        GPS gps = MyGeoHashUtils.getGpsByGeoHash(Bytes.toString(CellUtil.cloneValue(cell)));
                         gps.setCount(50);
                         list.add(gps);
                     }

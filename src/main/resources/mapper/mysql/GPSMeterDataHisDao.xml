@@ -42,7 +42,7 @@
     </select>
 
 
-    <select id="geoHashCount" resultType="com.qg.taxi.model.gps.Gps">
+    <select id="geoHashCount" resultType="com.qg.taxi.model.gps.GPS">
         SELECT COUNT(*) AS 'count',
         TIME_REPRE AS 'timeRepre' ,
         GEOHASH5 AS 'geoHash' ,
