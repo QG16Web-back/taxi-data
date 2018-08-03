@@ -234,8 +234,8 @@ public class GpsMeterDataHisController {
         }
 
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("查询-%d").build();
-        Date startDay = ConcurrentDateUtil.parse("2017-02-01");
-        Date date = ConcurrentDateUtil.parse(map.get("day"));
+        Date startDay = ConcurrentDateUtil.ymdParse("2017-02-01");
+        Date date = ConcurrentDateUtil.ymdParse(map.get("day"));
         String table = "meter_data_his" + (int) ((date.getTime() - startDay.getTime()) / (1000 * 3600 * 24) + 1);
         long start = System.currentTimeMillis();
         // Common Thread Pool
@@ -298,8 +298,8 @@ public class GpsMeterDataHisController {
             return result;
         }
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("查询-%d").build();
-        Date startDay = ConcurrentDateUtil.parse("2017-02-01");
-        Date date = ConcurrentDateUtil.parse(map.get("day"));
+        Date startDay = ConcurrentDateUtil.ymdParse("2017-02-01");
+        Date date = ConcurrentDateUtil.ymdParse(map.get("day"));
         String table;
         long start = System.currentTimeMillis();
         table = "meter_data_his" + (int) ((date.getTime() - startDay.getTime()) / (1000 * 3600 * 24) + 1);
