@@ -46,7 +46,7 @@ public class YctController {
 
     @PostMapping("/onoff")
     public RequestResult getYctOnOff(HttpServletRequest request, @RequestBody Map<String, String> map) {
-        File file = new File(request.getServletContext().getRealPath("/take-taxi/yct.json"));
+        File file = new File(request.getServletContext().getRealPath("/yct/yct.json"));
         Map<String, Object> result = new HashMap<>(3);
         if (!file.exists()) {
             return new RequestResult(StateEnum.NO_SUCH_FILE);
