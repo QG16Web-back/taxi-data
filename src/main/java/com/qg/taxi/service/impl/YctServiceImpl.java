@@ -54,10 +54,7 @@ public class YctServiceImpl implements YctService {
         if (file.exists()) {
             throw new TaxiException(StateEnum.FILE_IS_EXIST);
         }
-        boolean flag = file.createNewFile();
-        if (!flag) {
-            throw new IOException("创建文件失败");
-        }
+
 
         List<Yct> yctList = yctDao.getYctInfo();
         ConcurrentHashMap<String, List<ConcurrentHashMap<String, Object>>> resultMap = new ConcurrentHashMap<>();
@@ -136,6 +133,10 @@ public class YctServiceImpl implements YctService {
                 list.add(hashMap);
                 resultMap.put(yct.getYctLogicCardNo(), list);
             }
+        }
+        boolean flag = file.createNewFile();
+        if (!flag) {
+            throw new IOException("创建文件失败");
         }
         log.info("写文件");
         PrintStream printStream = new PrintStream(new FileOutputStream(file));
