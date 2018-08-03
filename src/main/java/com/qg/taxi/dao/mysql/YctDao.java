@@ -1,6 +1,6 @@
 package com.qg.taxi.dao.mysql;
 
-import com.qg.taxi.model.gps.GPS;
+import com.qg.taxi.model.gps.GpsDouble;
 import com.qg.taxi.model.gps.OnOffGps;
 import com.qg.taxi.model.inform.Yct;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,10 +29,10 @@ public interface YctDao {
      * @param tableName 表名
      * @return gps list
      */
-    List<GPS> getGps(@Param("PLATENO") String PLATENO,
-                     @Param("startTime") Date startTime,
-                     @Param("endTime") Date endTime,
-                     @Param("tableName") String tableName);
+    List<GpsDouble> getGps(@Param("PLATENO") String PLATENO,
+                           @Param("startTime") Date startTime,
+                           @Param("endTime") Date endTime,
+                           @Param("tableName") String tableName);
 
     /**
      * 获取上下车地点

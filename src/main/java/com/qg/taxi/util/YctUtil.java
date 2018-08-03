@@ -3,7 +3,7 @@ package com.qg.taxi.util;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.qg.taxi.dao.mysql.YctDao;
-import com.qg.taxi.model.gps.GPS;
+import com.qg.taxi.model.gps.GpsDouble;
 import com.qg.taxi.model.gps.OnOffGps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +52,12 @@ public class YctUtil {
         for (ConcurrentHashMap<String, Object> hashMap : list) {
             String startTime = hashMap.get("WORK_BEGIN_TIME").toString();
             String endTime = hashMap.get("WORK_END_TIME").toString();
-            List<GPS> dataList = new ArrayList<>();
+            List<GpsDouble> dataList = new ArrayList<>();
             if (ConcurrentDateUtil.getDate(ConcurrentDateUtil.parse(startTime), ConcurrentDateUtil.parse(endTime)) > 0) {
 
             } else {
                 int day = ConcurrentDateUtil.getDate(ConcurrentDateUtil.parse(startTime), ConcurrentDateUtil.parse("2017-02-01 00:00:00"));
-                List<GPS> gpsList = yctUtil.yctDao.getGps(hashMap.get("PLATENO").toString(), ConcurrentDateUtil.parse(hashMap.get("WORK_BEGIN_TIME").toString()),
+                List<GpsDouble> gpsList = yctUtil.yctDao.getGps(hashMap.get("PLATENO").toString(), ConcurrentDateUtil.parse(hashMap.get("WORK_BEGIN_TIME").toString()),
                         ConcurrentDateUtil.parse(hashMap.get("WORK_END_TIME").toString()), "gpsdata_copy" + (day + 1));
                 dataList.addAll(gpsList);
             }

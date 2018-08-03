@@ -9,7 +9,7 @@ import lombok.Data;
  * I'm the one to ignite the darkened skies.
  */
 @Data
-public class GPS {
+public class GpsDouble {
     private double LONGITUDE;
     private double LATITUDE;
 }
