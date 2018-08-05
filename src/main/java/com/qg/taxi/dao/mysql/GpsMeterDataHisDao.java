@@ -146,4 +146,5 @@ public interface GpsMeterDataHisDao {
      */
     List<GpsMeterDataHis> getMeterDataHisData(@Param("tableName") String tableName);
 
+
 }

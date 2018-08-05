@@ -23,13 +23,6 @@ public interface GpsMeterDataHisService {
     void insertMeterHisToMysql(int start, int end, int k, int size) throws ParseException;
 
 
-
-//    /**
-//     * 为gps_meter_his 表更新上rowkey字段
-//     * @param tableName 表名
-//     */
-//    void updateMeterHis(String tableName);
-
     /**
      * 统计一个区域内各个时间段的打车总量
      * 注：一个区域将划分为多个6位的geoHash

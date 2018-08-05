@@ -161,41 +161,41 @@
             <version>1.0.0-RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.qg</groupId>
-            <artifactId>luna</artifactId>
-            <version>0.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qg</groupId>-->
+            <!--<artifactId>luna</artifactId>-->
+            <!--<version>0.1</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.qg</groupId>
-            <artifactId>dynalogger</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qg</groupId>-->
+            <!--<artifactId>dynalogger</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.qg</groupId>
-            <artifactId>hbase-file-stream</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qg</groupId>-->
+            <!--<artifactId>hbase-file-stream</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.qg</groupId>
-            <artifactId>hbase-secondaryindex</artifactId>
-            <version>1.0.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qg</groupId>-->
+            <!--<artifactId>hbase-secondaryindex</artifactId>-->
+            <!--<version>1.0.2</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.qg</groupId>
-            <artifactId>phoenix-core-4.4.0-HBase</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qg</groupId>-->
+            <!--<artifactId>phoenix-core-4.4.0-HBase</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.qg</groupId>
-            <artifactId>zookeeper</artifactId>
-            <version>3.5.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qg</groupId>-->
+            <!--<artifactId>zookeeper</artifactId>-->
+            <!--<version>3.5.1</version>-->
+        <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
         <dependency>
